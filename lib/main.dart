@@ -70,9 +70,14 @@ class _DiceHomePageState extends State<DiceHomePage> {
 
             Text(
               'Total: $total',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
+                color: total < 6
+                  ? Colors.red
+                  : total == 6
+                    ? Colors.yellow
+                    : Colors.blue,
               ),
             ),
 
