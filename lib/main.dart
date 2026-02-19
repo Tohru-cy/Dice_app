@@ -34,6 +34,29 @@ class _DiceHomePageState extends State<DiceHomePage> {
     setState(() {
       leftDiceNumber = random.nextInt(6) + 1;
       rightDiceNumber = random.nextInt(6) + 1;
+
+      int total = leftDiceNumber + rightDiceNumber;
+
+      if (total == 7) {
+        // Show popup dialog
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Congratulations!'),
+              content: const Text('You won!'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // Close the dialog
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      }
     });
   }
 
@@ -50,7 +73,6 @@ class _DiceHomePageState extends State<DiceHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -65,24 +87,20 @@ class _DiceHomePageState extends State<DiceHomePage> {
                 ),
               ],
             ),
-
             const SizedBox(height: 30),
-
             Text(
               'Total: $total',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: total < 6
-                  ? Colors.red
-                  : total == 6
-                    ? Colors.yellow
-                    : Colors.blue,
+                    ? Colors.red
+                    : total == 6
+                        ? Colors.yellow
+                        : Colors.blue,
               ),
             ),
-
             const SizedBox(height: 20),
-
             ElevatedButton(
               onPressed: rollDice,
               child: const Text('Roll Dice'),
@@ -93,3 +111,4 @@ class _DiceHomePageState extends State<DiceHomePage> {
     );
   }
 }
+
